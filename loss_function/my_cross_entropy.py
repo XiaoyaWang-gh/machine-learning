@@ -17,11 +17,13 @@ def my_cross_entropy(x:List[List[float]],y:List[int])->float:
     res:float = 0
     x = my_softmax(x)
     for i in range(len(x)):
-        res += -math.log(x[i][y[i]],2)
+        res += -math.log(x[i][y[i]]) # 根号外面的1和底数e省去了
     res /= len(x) # mean
     return res
 
-
-x = [[1.5, 0.5, -0.5], [1.2, 0.2, 3.0]]
-y = [0, 2]
-print(my_cross_entropy(x,y))
+# 假设有一个简单的三分类问题，批量大小为2
+# 预测输出（通常是模型的原始输出，没有经过softmax）
+logits = [[1.5, 0.5, -0.5], [1.2, 0.2, 3.0]]
+# 0 和 2 分别表示第一个和第三个类别是正确的
+targets = [0, 2]
+print(my_cross_entropy(logits,targets))
